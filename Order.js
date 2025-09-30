@@ -15,6 +15,14 @@ const orderSchema = new mongoose.Schema({
                 type: Number,
                 required: true
             },
+            priceAtPurchase: {   
+                type: Number,
+                required: true
+            },
+            subtotal: {          
+                type: Number,
+                required: true
+            }
         
         }
     ],
@@ -22,16 +30,34 @@ const orderSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+
+     discount: {            
+        type: Number,
+        default: 0
+    },
+
+    finalAmount: {              
+        type: Number,
+        required: true
+    },
+
     paymentMethod: {
         type: String,
         enum: ["online" , "cod"],
         default: "cod"
     },
+
     status:{
         type: String,
         enum: ["pending", "shipped" , "in-transit" , "delivered"],
         default: "pending"
     },
+    
+    deliveryAddress: {     
+        type: String,
+        required: true
+    },
+
     deliveryPartner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
